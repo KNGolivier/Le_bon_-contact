@@ -1,17 +1,22 @@
-// src/components/HeaderPage.jsx
+
 import React, { useState } from 'react';
 import logo from '../assets/logo.png';
 import { Globe, Menu, X } from 'lucide-react';
+import { Link } from 'react-router-dom';
+
 
 export default function HeaderPage() {
   const [menuOpen, setMenuOpen] = useState(false);
 
   return (
-    <header className="bg-white px-4 py-4 shadow-sm">
-      <div className="max-w-7xl mx-auto flex items-center justify-between">
+    <header className="bg-white  shadow-sm">
+      <div className=" px-15 py-4 max-w-7xl mx-auto flex items-center justify-between">
         {/* Logo + recherche */}
         <div className="flex items-center gap-4">
-          <img src={logo} alt="Logo" className="w-20 md:w-24" />
+         <Link to="/">
+  <img src={logo}alt="Logo" className="cursor-pointer w-20" />
+</Link>
+
 
           <div className="hidden md:block">
             <input

@@ -6,7 +6,7 @@ import Home from './pages/Home';
 import Welcome from './pages/Welcome';
 import Categories from './pages/Categories';
 import CategorieDetailPage from './pages/CategorieDetailPage';
-import InscriptionClient from './pages/InscriptionClient';
+import InscriptionProForm from './pages/InscriptionProForm';
 import Connexion from './pages/Connexion';
 import Profil from './pages/Profil';
 import MetierDetailsPage from './pages/MetierDetailsPage'; 
@@ -24,7 +24,7 @@ ReactDOM.createRoot(document.getElementById('root')).render(
         <Route path="/home" element={<Home />} />
         <Route path="/categories" element={<Categories />} />
         <Route path="/categories/:nomCategorie" element={<CategorieDetailPage />} />
-        <Route path="/inscription-client" element={<InscriptionClient />} />
+        <Route path="/inscription" element={<InscriptionProForm />} />
         <Route path="/connexion" element={<Connexion />} />
         <Route path="/profil" element={<Profil />} />
         <Route path="/metiers/:nomMetier" element={<MetierDetailsPage />} />

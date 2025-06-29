@@ -5,6 +5,7 @@ import BecomeProBanner from '../components/BecomeProBanner';
 import MetiersList from '../components/MetiersList';
 import PromotionSection from '../components/PromotionSection';
 import Footer from '../components/Footer';
+import FaqSection from '../components/FaqSection';
 
 export default function Home() {
   return (
@@ -15,6 +16,7 @@ export default function Home() {
       <PopularCategories />
       <BecomeProBanner />
       <PromotionSection />
+      <FaqSection />
       <Footer />
     </div>
     

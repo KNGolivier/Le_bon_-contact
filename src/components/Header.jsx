@@ -11,19 +11,18 @@ const [showMenu, setShowMenu] = useState(false);
 
 
   return (
-    <header className="bg-[#00AEEF] text-white py-4 px-6">
-      <div className="max-w-7xl mx-auto flex justify-between items-center">
+    <header className="bg-[#00AEEF] text-white ">
+      <div className="px-15 py-4 max-w-7xl mx-auto flex justify-between items-center">
         {/* Logo */}
  <Link to="/" className="flex items-center space-x-2">
-  <img src={logo2} alt="Logo" className="w-32 object-contain cursor-pointer" />
+  <img src={logo2} alt="Logo" className="w-20 object-contain cursor-pointer" />
 </Link>
 
 
         {/* Menu */}
         <nav className="flex items-center space-x-6 text-sm font-medium text-black">
-        
-          <a href="#" className="flex items-center gap-1"><Globe size={16} /> Français</a>
-          <a href="#">Devenir Pro</a>
+          <a href="#" className="flex items-center gap-1"><Globe size={15} /> Français</a>
+          
           
           {user && user.urlProfile ? (
     <div className="relative">
@@ -62,7 +61,7 @@ const [showMenu, setShowMenu] = useState(false);
   <>
     <Link to="/connexion" className="text-white font-semibold">Se connecter</Link>
     <Link
-      to="/inscription-client"
+      to="/inscription"
       className="border border-white text-white px-3 py-1 rounded hover:bg-white hover:text-[#00AEEF] transition"
     >
       S'inscrire

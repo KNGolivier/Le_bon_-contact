@@ -14,7 +14,7 @@ export default function BecomeProBanner() {
           <p className="text-white text-sm opacity-90">
             Si on veut obtenir quelque chose que l’on n’a jamais eu, il faut tenter quelque chose que l’on n’a jamais fait.
           </p>
-          <button className="w-[30%] bg-[#f3f3f3] text-[#009fe3] font-bold text-[14px] font-[Montserrat] px-[10px] py-[12px] rounded-[10px] border-none cursor-pointer transition-all duration-300 ease-in-out mt-[15px] hover:bg-[#009fe3] hover:text-[#f3f3f3] hover:border-[10px] hover:border-white">
+          <button className="w-[30%] bg-[#f3f3f3] text-[#009fe3] font-bold text-[14px] font-[Montserrat] px-[10px] py-[12px] rounded-[10px] border-none cursor-pointer transition-all duration-300 ease-in-out mt-[15px] hover:bg-[#009fe3] hover:text-[#f3f3f3] hover:border-[1px] hover:border-white">
             commencer maintenant
           </button>
         </div>

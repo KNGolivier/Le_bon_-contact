@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import logo from '../assets/logo.png'; // ⚠️ adapte ce chemin si nécessaire
+import logo from '../assets/logo.png'; 
 
 export default function Connexion() {
   const [email, setEmail] = useState('');
@@ -29,10 +29,10 @@ export default function Connexion() {
         navigate('/Home');
       } else {
         const err = await response.json();
-        setMessage(err.message || "❌ Email ou mot de passe incorrect");
+        setMessage(err.message || "Email ou mot de passe incorrect");
       }
     } catch (error) {
-      setMessage("❌ Erreur serveur ou réseau.");
+      setMessage("Erreur serveur ou réseau.");
     }
   };
 

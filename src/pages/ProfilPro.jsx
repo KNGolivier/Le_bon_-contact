@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+
+import { useParams , useNavigate  } from 'react-router-dom';
 import HeaderPage from '../components/HeaderPage';
 import PromotionSection from '../components/PromotionSection';
 import Footer from '../components/Footer';
@@ -24,9 +25,6 @@ export default function ProfilPro() {
   const [realisations, setRealisations] = useState([]);
     const navigate = useNavigate();
 
-  const handleAjouterClick = () => {
-    navigate('/ajouter-realisation');
-  };
 
   useEffect(() => {
     fetch('http://localhost:8080/api/v1/categories')
@@ -130,14 +128,7 @@ export default function ProfilPro() {
           )}
         </div>
       </div>
-      <div className="mt-6">
-        <button
-          onClick={handleAjouterClick}
-          className="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 transition duration-200"
-        >
-          Ajouter une réalisation
-        </button>
-      </div>
+ 
 
       <PromotionSection />
       <Footer />
