@@ -33,7 +33,11 @@ export default function HeaderConnexion() {
           {/* Avatar */}
           {user?.urlProfile && (
             <img
-              src={user.urlProfile}
+              src={
+    user.urlProfile?.startsWith('http')
+      ? user.urlProfile
+      : `http://localhost:8080/Uploads/${user.urlProfile}`
+  }
               alt="profil"
               className="w-8 h-8 rounded-full object-cover"
             />

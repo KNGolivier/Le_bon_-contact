@@ -4,31 +4,37 @@ import { useNavigate } from 'react-router-dom';
 export default function AjouterRealisation() {
   const [titre, setTitre] = useState('');
   const [description, setDescription] = useState('');
-  const [urlImage, setUrlImage] = useState('');
+  const [image, setImage] = useState(null);
   const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const token = localStorage.getItem("token"); // ou selon ton stockage
-    const res = await fetch("http://localhost:8080/api/realisations", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${token}`
-      },
-      body: JSON.stringify({
-        titre,
-        description,
-        urlImage
-      }),
-    });
+    const token = localStorage.getItem('token');
+    const formData = new FormData();
+    formData.append('titre', titre);
+    formData.append('description', description);
+    formData.append('image', image);
 
-    if (res.ok) {
-      alert("Réalisation ajoutée avec succès !");
-      navigate(-1); // retourne à la page précédente
-    } else {
-      alert("Erreur lors de l'ajout");
+    try {
+      const res = await fetch('http://localhost:8080/api/v1/realisations', {
+        method: 'POST',
+        headers: {
+          Authorization: `Bearer ${token}`
+        },
+        body: formData,
+      });
+
+      if (res.ok) {
+        alert('Réalisation ajoutée avec succès !');
+        navigate(-1);
+      } else {
+        const errorText = await res.text();
+        alert('Erreur lors de l\'ajout : ' + errorText);
+      }
+    } catch (error) {
+      console.error('Erreur :', error);
+      alert('Erreur réseau ou serveur.');
     }
   };
 
@@ -52,16 +58,15 @@ export default function AjouterRealisation() {
           required
         />
         <input
-          type="text"
-          placeholder="URL de l'image"
+          type="file"
+          accept="image/*"
           className="w-full p-2 border rounded"
-          value={urlImage}
-          onChange={(e) => setUrlImage(e.target.value)}
+          onChange={(e) => setImage(e.target.files[0])}
           required
         />
         <button
           type="submit"
-          className="bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700"
+          className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-green-700"
         >
           Enregistrer
         </button>

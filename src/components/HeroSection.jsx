@@ -1,17 +1,17 @@
 import React from 'react';
 import WomanImg from '../assets/Woman.png';
-import SearchBar from '../components/SearchBar'; // 👈 importe la barre de recherche
+import SearchBar from '../components/SearchBar'; 
 
 export default function HeroSection() {
   return (
     <section className="w-full bg-[#00AEEF]">
-      <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between px-6 py-10">
+      <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center px-10">
         {/* Texte */}
         <div className="text-white md:w-3/7 space-y-6">
           <h1 className="text-3xl md:text-4xl font-bold">
             Trouver des professionnels de confiance pour tous vos besoins
           </h1>
-          <SearchBar /> {/* 👈 intègre la barre de recherche dynamique ici */}
+          <SearchBar />
         </div>
 
         {/* Image */}

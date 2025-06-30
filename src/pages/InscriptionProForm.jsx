@@ -2,8 +2,8 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Step1InfoPerso from '../components/Step1InfoPerso';
 import Step2InfoPro from '../components/Step2InfoPro';
-import Step3Credentials from '../components//Step3Credentials';
-import logo from '../assets/logo.png'; 
+import Step3Credentials from '../components/Step3Credentials';
+import logo from '../assets/logo.png';
 
 export default function InscriptionProForm() {
   const [step, setStep] = useState(1);
@@ -14,18 +14,19 @@ export default function InscriptionProForm() {
     numero: '',
     adresse: '',
     identite: '',
+    typePiece: '',
+    pieceJointe: null,
     nomMetier: '',
     urlProfile: null,
     motDePasse: '',
     confirmPassword: '',
-    accepted: false
+    accepted: false,
   });
 
   const [message, setMessage] = useState('');
   const navigate = useNavigate();
 
   const nextStep = () => {
-    // Validation par étape
     if (step === 1) {
       const { nom, prenom, email, numero } = formData;
       if (!nom || !prenom || !email || !numero) {
@@ -34,9 +35,9 @@ export default function InscriptionProForm() {
       }
     }
     if (step === 2) {
-      const { adresse, identite, nomMetier } = formData;
-      if (!adresse || !identite || !nomMetier) {
-        setMessage('❗Veuillez remplir tous les champs de l\'étape 2.');
+      const { adresse, identite, nomMetier, urlProfile, pieceJointe, typePiece } = formData;
+      if (!adresse || !identite || !nomMetier || !urlProfile || !pieceJointe || !typePiece) {
+        setMessage('❗Tous les champs sont requis dans l\'étape 2.');
         return;
       }
     }
@@ -60,8 +61,6 @@ export default function InscriptionProForm() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
-
     if (!formData.accepted) {
       setMessage("❗Vous devez accepter les conditions.");
       return;
@@ -72,7 +71,7 @@ export default function InscriptionProForm() {
       return;
     }
 
-    const dataToSend = {
+    const data = {
       nom: formData.nom,
       prenom: formData.prenom,
       email: formData.email,
@@ -80,30 +79,32 @@ export default function InscriptionProForm() {
       motDePasse: formData.motDePasse,
       adresse: formData.adresse,
       identite: formData.identite,
-      nomMetier: formData.nomMetier
+      nomMetier: formData.nomMetier,
+      typePiece: formData.typePiece
     };
-console.log("✅ Données envoyées :", dataToSend);
+
+    const formPayload = new FormData();
+    formPayload.append("data", new Blob([JSON.stringify(data)], { type: "application/json" }));
+    formPayload.append("photo", formData.urlProfile);
+    formPayload.append("pieceJointe", formData.pieceJointe);
 
     try {
       const res = await fetch('http://localhost:8080/api/auth/pro', {
         method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(dataToSend)
+        body: formPayload,
       });
 
       if (res.ok) {
-        setMessage("✅ Inscription réussie !");
+        setMessage(" Inscription réussie !");
         setTimeout(() => {
           navigate('/connexion');
         }, 1500);
       } else {
         const json = await res.json();
-        setMessage(`❌ Erreur : ${json.error || "Inscription échouée"}`);
+        setMessage(` Erreur : ${json.error || "Inscription échouée"}`);
       }
     } catch (err) {
-      setMessage("❌ Erreur réseau ou serveur.");
+      setMessage(" Erreur réseau ou serveur.");
     }
   };
 
@@ -111,19 +112,15 @@ console.log("✅ Données envoyées :", dataToSend);
     <div className="min-h-screen flex">
       {/* Image gauche */}
       <div className="w-1/2 hidden md:block">
-        <img
-          src="../images/register-client.png"
-          alt="Client"
-          className="h-146 w-full object-cover"
-        />
+        <img src="../images/register-client.png" alt="Client" className="h-195 w-full object-cover" />
       </div>
 
       {/* Formulaire à droite */}
       <div className="w-full md:w-1/2 flex flex-col justify-center px-10 py-12">
-       <div className=" mb-6">
-                <img src={logo} alt="Logo" className="w-25 object-contain" />
-              </div>
-        <h1 className="text-2xl font-bold mb-1">Bienvenue Professionnel </h1>
+        <div className="mb-6">
+          <img src={logo} alt="Logo" className="w-25 object-contain" />
+        </div>
+        <h1 className="text-2xl font-bold mb-1">Bienvenue Professionnel</h1>
         <p className="text-gray-600 mb-6">Complétez les étapes pour rejoindre la plateforme</p>
 
         {message && <p className="text-sm text-center text-red-600 mb-4">{message}</p>}
@@ -133,28 +130,16 @@ console.log("✅ Données envoyées :", dataToSend);
             <Step1InfoPerso formData={formData} handleChange={handleChange} nextStep={nextStep} />
           )}
           {step === 2 && (
-            <Step2InfoPro
-              formData={formData}
-              handleChange={handleChange}
-              nextStep={nextStep}
-              prevStep={prevStep}
-            />
+            <Step2InfoPro formData={formData} handleChange={handleChange} nextStep={nextStep} prevStep={prevStep} />
           )}
           {step === 3 && (
-            <Step3Credentials
-              formData={formData}
-              handleChange={handleChange}
-              prevStep={prevStep}
-              handleSubmit={handleSubmit}
-            />
+            <Step3Credentials formData={formData} handleChange={handleChange} prevStep={prevStep} handleSubmit={handleSubmit} />
           )}
         </form>
 
         <p className="text-sm text-center mt-4">
           Vous avez déjà un compte ?{" "}
-          <a href="/connexion" className="text-blue-600 underline">
-            Connectez-vous !
-          </a>
+          <a href="/connexion" className="text-blue-600 underline">Connectez-vous !</a>
         </p>
       </div>
     </div>

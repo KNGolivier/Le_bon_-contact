@@ -8,7 +8,7 @@ const SearchBar = () => {
 
   useEffect(() => {
     const delay = setTimeout(() => {
-      if (searchTerm.length > 1) {
+      if (searchTerm.length >=1) {
         fetch(`http://localhost:8080/api/v1/metiers/search?query=${searchTerm}`)
           .then(response => {
             if (!response.ok) {
@@ -58,7 +58,7 @@ const SearchBar = () => {
             <li
               key={m.id}
               onClick={() => handleClick(m)}
-              className="px-4 py-2 cursor-pointer hover:bg-gray-100"
+              className="px-4 py-2 text-black cursor-pointer hover:bg-gray-100"
             >
               {m.nom}
             </li>

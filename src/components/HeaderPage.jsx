@@ -29,18 +29,12 @@ export default function HeaderPage() {
 
         {/* Menu desktop */}
         <nav className="hidden md:flex items-center gap-4 text-sm font-medium">
-          <a href="#" className="underline text- #00AEEF">Découvrir</a>
+          
           <a href="#" className="flex items-center gap-1 text-black">
             <Globe size={16} /> Français
           </a>
-          <a href="#" className="text-black">Devenir Pro</a>
-          <a href="#" className="text-#00AEEF">Se connecter</a>
-          <a
-            href="#"
-            className="bg-[#00AEEF] text-white px-4 py-2 rounded-md font-semibold hover:bg-blue-600 transition"
-          >
-            S’inscrire
-          </a>
+   
+          
         </nav>
 
         {/* Menu mobile (bouton) */}

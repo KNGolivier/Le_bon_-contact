@@ -47,7 +47,8 @@ export default function Profil() {
           </div>
         </div>
       </div>
-           <div className="mt-6">
+           <div className="mt-6 flex justify-center py-10
+           ">
         <button
           onClick={handleAjouterClick}
           className="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 transition duration-200"

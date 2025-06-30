@@ -104,7 +104,7 @@ export default function Connexion() {
 
         <p className="text-sm text-center mt-6">
           Vous n'avez pas de compte ?{" "}
-          <a href="/inscription-client" className="text-blue-600 underline">
+          <a href="/inscription" className="text-blue-600 underline">
             Créer un compte
           </a>
         </p>
